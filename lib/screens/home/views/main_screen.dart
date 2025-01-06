@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../data/data.dart';
+
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
@@ -112,7 +114,7 @@ class MainScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Income', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),),
-                                Text('\$1000', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),),
+                                Text('\$1000', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),),
                               ],
                             )
                           ],
@@ -133,7 +135,7 @@ class MainScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text('Expense', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),),
-                                Text('\$1000', style: TextStyle(color: Colors.white, fontSize: 12, fontWeight: FontWeight.w600),),
+                                Text('\$1000', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),),
                               ],
                             )
                           ],
@@ -142,6 +144,81 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+            SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Transactions', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Placeholder()));
+                  },
+                  child: Row(
+                    children: [
+                      Text('View All', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),),
+                      Icon(CupertinoIcons.chevron_right, color: Theme.of(context).colorScheme.outline,),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: myData.length,
+                itemBuilder: (context, int index) {
+                  var data = myData[index];
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Container(
+                      height: 100,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: data['color'] as Color,
+                                      ),
+                                    ),
+                                    Icon(data['icon'] as IconData, color: Colors.white,),
+                                  ],
+                                ),
+                                SizedBox(width: 12,),
+                                Text(data['name'] as String, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SizedBox(height: 12,),
+                                Text(data['totalAmount'] as String, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                                Text(data['date'] as String, style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400),),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],

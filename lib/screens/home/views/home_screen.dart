@@ -12,10 +12,6 @@ class HomeScreen extends StatelessWidget {
     var theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        centerTitle: true,
-      ),
       body: const MainScreen(),
 
       bottomNavigationBar: BottomNavigationBar(
@@ -35,11 +31,12 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            gradient: LinearGradient(colors: [theme.colorScheme.tertiary,
-             theme.colorScheme.secondary,
-              theme.colorScheme.primary],
-              transform: GradientRotation(pi/4)
-              ),
+            gradient: LinearGradient(
+              colors: [theme.colorScheme.tertiary,
+               theme.colorScheme.secondary,
+                theme.colorScheme.primary],
+              transform: const GradientRotation(pi/4),
+            ),
           ),
           constraints: BoxConstraints.tightFor(width: 60, height: 60),
           child: Icon(CupertinoIcons.add, color: Colors.white),

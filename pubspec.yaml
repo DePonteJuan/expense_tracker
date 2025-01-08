@@ -36,7 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   fl_chart: ^0.70.0
   font_awesome_flutter: ^10.8.0
-  intl: ^0.20.1
+  flutter_iconpicker: ^4.0.1
+  flutter_colorpicker: ^1.1.0
 
 dev_dependencies:
   flutter_test:

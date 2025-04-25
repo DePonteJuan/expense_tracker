@@ -125,6 +125,9 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
     );
   }
 
+  bool get _isFormValid =>
+      _categoryNameController.text.isNotEmpty && _selectedIcon != null;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -276,7 +279,11 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                   child: const Text('Cancel'),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: _isFormValid
+                      ? () {
+                          Navigator.pop(context);
+                        }
+                      : null,
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 30, vertical: 16),
@@ -284,9 +291,9 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     foregroundColor: Colors.grey.shade100,
-                    backgroundColor: Colors.black,
+                    backgroundColor: _isFormValid ? Colors.black : Colors.grey,
                   ),
-                  child: Text(
+                  child: const Text(
                     'Save',
                     style: TextStyle(
                       color: Colors.white,

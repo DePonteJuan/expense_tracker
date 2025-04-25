@@ -1,8 +1,12 @@
+
+import 'package:expense_repository/expense_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'custom_text_form_field.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:uuid/uuid.dart';
+import 'package:expense_tracker/screens/add_expense/blocs/create_category/create_category_bloc.dart';
 
 class CategoryInput extends StatelessWidget {
   final TextEditingController controller;
@@ -281,6 +285,13 @@ class _AddCategoryDialogState extends State<AddCategoryDialog> {
                 TextButton(
                   onPressed: _isFormValid
                       ? () {
+                          Category category = Category.empty;
+                          category.categoryId = Uuid().v4();
+                          category.name = _categoryNameController.text;
+                          category.icon = _selectedIcon.toString();
+                          category.color = _selectedColor.toString();
+                          
+                          context.read<CreateCategoryBloc>().add(CreateCategory(category));
                           Navigator.pop(context);
                         }
                       : null,
